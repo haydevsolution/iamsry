@@ -78,7 +78,7 @@ p { font-size: 1.05rem; line-height: 1.55; color: var(--muted); max-width: 34ch;
 .btn:active { transform: scale(.95); }
 .btn-primary { background: linear-gradient(135deg, var(--rose), #ff758f); color: #fff; box-shadow: 0 10px 30px rgba(255, 77, 109, .45); }
 .btn-ghost { background: var(--card); border: 1px solid var(--card-border); color: var(--text); backdrop-filter: blur(10px); }
-.btn-whatsapp { background: #25d366; color: #fff; box-shadow: 0 10px 30px rgba(37, 211, 102, .4); text-decoration: none; }
+.btn-link { text-decoration: none; }
 .btn[disabled] { opacity: .4; pointer-events: none; }
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 

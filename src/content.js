@@ -128,5 +128,5 @@ export const finalPage = {
     'Diese Chance verschwende ich nicht. Versprochen.',
     '*Ich liebe dich. Mehr als alles.*',
   ],
-  button: 'Schreib mir auf WhatsApp',
+  button: 'Schreib mir auf WhatsApp ❤️',
 };
