@@ -70,7 +70,7 @@ export const wishes = [
   { type: 'video', src: 'photos/wishes/03-einkaufen.mp4', poster: 'photos/wishes/03-einkaufen-poster.jpg', text: 'gemeinsam Einkaufsläden unsicher machen.' },
   { src: 'photos/wishes/04-schminken.jpg', text: 'dich schminken.', fit: 'contain' },
   { src: 'photos/wishes/05-karten.jpg', text: 'mit dir Komkan spielen, und du darfst sogar schummeln.' },
-  { type: 'video', src: 'photos/wishes/06-umarmen.mp4', poster: 'photos/wishes/06-umarmen-poster.jpg', text: 'dich umarmen.' },
+  { type: 'video', src: 'photos/wishes/06-lieblingsumarmung.mp4', poster: 'photos/wishes/06-lieblingsumarmung-poster.jpg', text: 'dich umarmen.' },
   { src: 'photos/wishes/07-punks.jpg', text: 'gemeinsam wie Punks aussehen, damit unsere Eltern schockiert sind.', fit: 'contain' },
   { src: 'photos/wishes/08-kaffee.jpg', text: 'mit dir gemeinsam Kaffee trinken.' },
 ];
