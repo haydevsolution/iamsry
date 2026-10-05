@@ -1,22 +1,30 @@
 /* ── Intro: Briefumschlag ─────────────────────────────────── */
-.envelope { position: relative; width: 240px; height: 160px; margin: 24px auto; cursor: pointer; perspective: 800px;
-  animation: bob 3s ease-in-out infinite; }
-.envelope .body { position: absolute; inset: 0; background: linear-gradient(160deg, #ff8fa3, #ff4d6d); border-radius: 12px;
-  box-shadow: 0 24px 50px rgba(255,77,109,.4); overflow: hidden; }
-.envelope .body::before, .envelope .body::after { content: ''; position: absolute; width: 200px; height: 200px;
-  background: linear-gradient(160deg, #ff6b85, #ff4d6d); transform: rotate(45deg); top: 60px; }
-.envelope .body::before { left: -140px; } .envelope .body::after { right: -140px; }
-.envelope .flap { position: absolute; top: 0; left: 0; right: 0; height: 90px; background: #ff758f; border-radius: 12px 12px 0 0;
-  clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .7s cubic-bezier(.2,.8,.2,1); z-index: 3; }
-.envelope .letter { position: absolute; left: 16px; right: 16px; bottom: 10px; height: 120px; background: #fff; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center; font-size: 3rem; transition: transform .8s cubic-bezier(.2,.8,.2,1) .25s; z-index: 2; }
-.envelope .seal { position: absolute; left: 50%; top: 78px; transform: translateX(-50%); width: 46px; height: 46px; border-radius: 50%;
-  background: var(--gold); display: grid; place-items: center; font-size: 1.4rem; z-index: 4; box-shadow: 0 6px 14px rgba(0,0,0,.25);
-  transition: transform .4s, opacity .4s; }
+.envelope { position: relative; width: 250px; height: 165px; margin: 36px auto 10px; cursor: pointer; perspective: 900px;
+  animation: bob 3s ease-in-out infinite; filter: drop-shadow(0 24px 40px rgba(255, 77, 109, .35)); }
+.envelope > * { position: absolute; }
+.env-back { inset: 0; border-radius: 12px; background: linear-gradient(180deg, #e63e5d, #c92f4c); z-index: 0; }
+.env-letter { left: 14px; right: 14px; bottom: 10px; height: 128px; border-radius: 6px; z-index: 1;
+  background: #fffaf7 repeating-linear-gradient(transparent 0 17px, rgba(60, 30, 40, .08) 17px 18px); background-position: 0 46px;
+  display: flex; align-items: flex-start; justify-content: center; padding-top: 14px;
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1) .35s, box-shadow .4s .5s; }
+.env-letter-heart { font-size: 2rem; line-height: 1; }
+.env-front { inset: 0; border-radius: 12px; z-index: 2;
+  background: linear-gradient(160deg, #ff8fa3, #ff4d6d 55%, #ff3d60);
+  clip-path: polygon(0 0, 50% 62%, 100% 0, 100% 100%, 0 100%); }
+.env-front::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(to bottom right, transparent 49.5%, rgba(255, 255, 255, .22) 50%, transparent 50.5%),
+  linear-gradient(to bottom left, transparent 49.5%, rgba(255, 255, 255, .22) 50%, transparent 50.5%); opacity: .7; }
+.env-flap { top: 0; left: 0; right: 0; height: 100px; z-index: 3; transform-origin: top center;
+  background: linear-gradient(180deg, #ff758f, #ff5c7a); clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 12px 12px 0 0; transition: transform .75s cubic-bezier(.4, 0, .2, 1), z-index 0s .35s; backface-visibility: visible; }
+.env-seal { left: 50%; top: 100px; translate: -50% -50%; width: 46px; height: 46px; border-radius: 50%; z-index: 4;
+  background: radial-gradient(circle at 35% 30%, #ffe08a, #f5b000); display: grid; place-items: center; font-size: 1.3rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .25), inset 0 -3px 0 rgba(0, 0, 0, .12); transition: transform .35s, opacity .35s; }
 .envelope.open { animation: none; }
-.envelope.open .flap { transform: rotateX(180deg); }
-.envelope.open .letter { transform: translateY(-140px); }
-.envelope.open .seal { transform: translateX(-50%) scale(0); opacity: 0; }
+.envelope.open .env-flap { transform: rotateX(180deg); z-index: 0; background: linear-gradient(180deg, #d8324f, #e63e5d); }
+.envelope.open .env-seal { transform: scale(0); opacity: 0; }
+.envelope.open .env-letter { transform: translateY(-118px) scale(1.04); z-index: 5; box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
+.scene-start h1, .scene-start .hint { transition: opacity .5s ease, transform .5s ease; }
+.scene-start.opening h1, .scene-start.opening .hint { opacity: 0; transform: translateY(-10px); }
 .tap-hint { animation: bob 1.6s ease-in-out infinite; }
 
 /* ── Sorry: trauriges Gesicht ────────────────────────────── */
