@@ -66,7 +66,14 @@ export default {
     no.addEventListener('pointerdown', onNo);
     no.addEventListener('click', (e) => e.preventDefault());
 
+    // Bild über der Frage; fehlt die Datei, wird es still ausgeblendet
+    const picture = questionPage.image
+      ? h('figure', { class: 'question-pic fade-in' }, h('img', { src: questionPage.image.src, alt: questionPage.image.alt, draggable: 'false' }))
+      : null;
+    picture?.querySelector('img').addEventListener('error', () => picture.remove());
+
     el.append(
+      ...(picture ? [picture] : []),
       h('h2', { class: 'fade-in' }, questionPage.title),
       h('p', { class: 'fade-in' }, questionPage.text),
       comment,

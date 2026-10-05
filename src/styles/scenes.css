@@ -194,3 +194,5 @@
 }
 .question-comment { min-height: 3.2em; color: var(--gold); font-weight: 700; max-width: none; }
 .btn-no.shake { animation: shake .4s; }
+.question-pic { width: min(72vw, 300px); margin: 0 auto 4px; }
+.question-pic img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 0 3px rgba(255,255,255,.08); }

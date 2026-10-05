@@ -95,6 +95,7 @@ export const madlinPage = {
 
 // Die Frage
 export const questionPage = {
+  image: { src: 'photos/question/herz-mond.jpg', alt: 'Unsere Hände formen ein Herz vor dem Mond' },
   title: `${HER_NAME}, gibst du mir eine letzte Chance?`,
   text: 'Ich verspreche dir, ich gebe mein Bestes, dich glücklich zu machen. Du bedeutest mir sehr viel.',
   // Kommentare bei den ersten "Nein"-Versuchen; danach flieht der Button
