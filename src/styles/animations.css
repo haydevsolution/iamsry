@@ -1,0 +1,70 @@
+@keyframes glow-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(12vw, 8vh) scale(1.15); }
+}
+@keyframes heart-rise {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: .9; }
+  100% { transform: translate(var(--drift, 0px), -110vh) rotate(25deg); opacity: 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.18); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.12); }
+  70% { transform: scale(1); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+@keyframes pop {
+  0% { transform: scale(.6); opacity: 0; }
+  70% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes tear {
+  0% { transform: translateY(0) scaleY(1); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(48px) scaleY(1.4); opacity: 0; }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(.1); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(.4) rotate(0); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+@keyframes stamp {
+  0% { transform: scale(2.2) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(.95) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-8deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(255,77,109,.5)); }
+  50% { filter: drop-shadow(0 0 36px rgba(255,77,109,1)); }
+}
+@keyframes bounce-in {
+  0% { transform: translateY(-40px); opacity: 0; }
+  60% { transform: translateY(8px); opacity: 1; }
+  100% { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

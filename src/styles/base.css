@@ -1,0 +1,108 @@
+:root {
+  --bg: #1a0b2e;
+  --bg-2: #2d1452;
+  --rose: #ff4d6d;
+  --rose-soft: #ff8fa3;
+  --gold: #ffd166;
+  --violet: #c77dff;
+  --text: #fff7fa;
+  --muted: rgba(255, 247, 250, 0.7);
+  --card: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.16);
+  --radius: 22px;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { overflow-x: hidden; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+body { min-height: 100dvh; overscroll-behavior-y: none; overflow-x: clip; }
+
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ── Hintergrund ───────────────────────────────────────────── */
+.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 0%, var(--bg-2), var(--bg) 70%); }
+.bg-glow { position: absolute; width: 70vmax; height: 70vmax; border-radius: 50%; filter: blur(80px); opacity: .45;
+  animation: glow-drift 18s ease-in-out infinite alternate; }
+.bg-glow-1 { background: #ff4d6d; top: -30vmax; left: -20vmax; }
+.bg-glow-2 { background: #7b2cbf; bottom: -35vmax; right: -25vmax; animation-delay: -9s; }
+.hearts { position: absolute; inset: 0; }
+.heart { position: absolute; bottom: -40px; animation: heart-rise linear forwards; will-change: transform, opacity; }
+
+/* ── Layout ────────────────────────────────────────────────── */
+#app { position: relative; z-index: 1; min-height: 100dvh; display: flex; }
+.scene {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; width: 100%; max-width: 520px; margin: 0 auto;
+  padding: calc(var(--safe-top) + 56px) 20px calc(var(--safe-bottom) + 28px);
+  gap: 18px;
+}
+
+.progress { position: fixed; top: calc(var(--safe-top) + 14px); left: 0; right: 0; z-index: 5;
+  display: flex; justify-content: center; gap: 7px; pointer-events: none; }
+.progress i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.22); transition: all .4s; }
+.progress i.done { background: var(--rose-soft); }
+.progress i.active { width: 22px; border-radius: 4px; background: var(--rose); }
+
+/* ── Typografie ────────────────────────────────────────────── */
+h1 { font-family: var(--font-hand); font-weight: 700; font-size: clamp(2.3rem, 10vw, 3.4rem); line-height: 1.05;
+  text-shadow: 0 4px 24px rgba(255, 77, 109, .35); }
+h2 { font-family: var(--font-hand); font-weight: 500; font-size: clamp(1.7rem, 7vw, 2.4rem); line-height: 1.1; }
+p { font-size: 1.05rem; line-height: 1.55; color: var(--muted); max-width: 34ch; }
+.lead { color: var(--text); font-weight: 600; }
+.hint { font-size: .85rem; color: var(--muted); opacity: .8; }
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  min-height: 54px; padding: 14px 30px; border-radius: 999px; font-weight: 800; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform .15s ease, box-shadow .2s ease, opacity .2s; touch-action: manipulation;
+}
+.btn:active { transform: scale(.95); }
+.btn-primary { background: linear-gradient(135deg, var(--rose), #ff758f); color: #fff; box-shadow: 0 10px 30px rgba(255, 77, 109, .45); }
+.btn-ghost { background: var(--card); border: 1px solid var(--card-border); color: var(--text); backdrop-filter: blur(10px); }
+.btn-whatsapp { background: #25d366; color: #fff; box-shadow: 0 10px 30px rgba(37, 211, 102, .4); text-decoration: none; }
+.btn[disabled] { opacity: .4; pointer-events: none; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ── Karten ────────────────────────────────────────────────── */
+.card { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 20px; }
+
+/* ── Fotos & Videos ─────────────────────────────────────────── */
+.photo { display: flex; flex-direction: column; gap: 10px; }
+.photo-frame { position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden;
+  background: rgba(0,0,0,.35); box-shadow: 0 18px 40px rgba(0,0,0,.4); }
+.photo-frame img, .photo-frame video { width: 100%; height: 100%; object-fit: cover; }
+.fit-contain .photo-frame img { object-fit: contain; position: relative; }
+.photo-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(22px) brightness(.55); transform: scale(1.1); }
+.photo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); border: 1px dashed var(--card-border); }
+.photo-placeholder span { font-size: 4rem; animation: bob 3s ease-in-out infinite; }
+.photo-placeholder small { color: var(--muted); font-size: .8rem; }
+.video-badge { position: absolute; top: 10px; right: 10px; font-size: .7rem; font-weight: 800; letter-spacing: .04em; padding: 4px 9px;
+  border-radius: 999px; background: rgba(0,0,0,.45); backdrop-filter: blur(6px); color: #fff; }
+.photo figcaption { font-family: var(--font-hand); font-size: 1.5rem; line-height: 1.15; color: var(--text); }
+.photo-note { font-size: .9rem; color: var(--muted); font-style: italic; margin: -4px auto 0; }
+.photo-highlight .photo-frame { box-shadow: 0 0 0 3px var(--gold), 0 18px 50px rgba(255, 209, 102, .35); }
+.photo-highlight figcaption { color: var(--gold); }
+
+.fade-in { animation: fade-up .6s cubic-bezier(.2,.8,.2,1) both; }
+.hidden { display: none !important; }

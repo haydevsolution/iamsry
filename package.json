@@ -1,0 +1,17 @@
+{
+  "name": "iamsry",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.3"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
