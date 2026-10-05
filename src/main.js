@@ -4,6 +4,7 @@ import './styles/scenes.css';
 
 import { registerScene, startRouter, sceneOrder } from './router.js';
 import { startHearts } from './effects.js';
+import { initMusic } from './music.js';
 
 import intro from './scenes/intro.js';
 import sorry from './scenes/sorry.js';
@@ -36,4 +37,5 @@ document.addEventListener('scene:change', ({ detail }) => {
 });
 
 startHearts(document.getElementById('hearts'));
+initMusic();
 startRouter();

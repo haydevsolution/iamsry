@@ -104,6 +104,12 @@ export const questionPage = {
   ],
 };
 
+// Hintergrundmusik, läuft in dieser Reihenfolge in Endlosschleife (Dateien in public/audio/)
+export const playlist = [
+  'audio/01-hate-that-i-love-you.mp3',
+  'audio/02-take-a-bow.mp3',
+];
+
 // Texte für den weglaufenden "Nein"-Button, in Reihenfolge der Versuche
 export const noTexts = [
   'Nein',
