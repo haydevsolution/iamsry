@@ -10,14 +10,11 @@ export default {
       return card;
     });
     const track = h('div', { class: 'story-track' }, cards);
-    const counter = h('p', { class: 'hint story-counter' }, `1 / ${photos.length}`);
     const hint = h('div', { class: 'swipe-hint hint' }, 'Wische', h('span', {}, '👉'));
     const cta = h('div', { class: 'btn-row hidden fade-in' }, button('Weiter', () => next()));
 
-    // Zähler mitführen; Weiter-Button erscheint, sobald sie beim letzten Bild angekommen ist
+    // Weiter-Button erscheint, sobald sie beim letzten Bild angekommen ist
     const onScroll = () => {
-      const idx = Math.round(track.scrollLeft / (cards[0]?.offsetWidth + 16 || 1));
-      counter.textContent = `${Math.min(idx + 1, photos.length)} / ${photos.length}`;
       const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 40;
       if (atEnd) { cta.classList.remove('hidden'); hint.classList.add('hidden'); }
     };
@@ -26,7 +23,7 @@ export default {
 
     el.append(
       h('h2', { class: 'fade-in' }, 'Unsere Geschichte'),
-      track, counter, hint, cta,
+      track, hint, cta,
     );
 
     // Beim Verlassen der Szene alle Videos stoppen

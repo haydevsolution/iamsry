@@ -1,8 +1,6 @@
 import { h, button, buzz } from '../ui.js';
-import { questionPage, noTexts, WHATSAPP_NUMBER, WHATSAPP_TEXT } from '../content.js';
+import { questionPage, noTexts } from '../content.js';
 import { celebrate } from '../effects.js';
-
-const waLink = () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
 export default {
   id: 'question',
@@ -13,12 +11,11 @@ export default {
     const yes = button('Ja ❤️', () => {
       yes.disabled = true;
       no.remove();
-      comment.textContent = 'Danke. Ich bring dich zu WhatsApp...';
+      comment.textContent = 'Danke.';
       celebrate();
       buzz([40, 60, 40, 60, 120]);
-      // Finale als Rücksprungziel setzen, dann zu WhatsApp
-      setTimeout(() => go('final'), 1200);
-      setTimeout(() => { if (WHATSAPP_NUMBER) location.href = waLink(); }, 1700);
+      // Weiter zur Finale-Seite; WhatsApp öffnet sie dort selbst per Button
+      setTimeout(() => go('final'), 1600);
     }, 'primary', { class: 'btn btn-primary btn-yes' });
 
     const no = button('Nein', () => {}, 'ghost', { class: 'btn btn-ghost btn-no' });

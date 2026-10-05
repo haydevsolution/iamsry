@@ -12,7 +12,7 @@ export const WHATSAPP_TEXT = 'Ja ❤️';
 // type 'video' spielt stumm im Loop, aber nur solange die Karte sichtbar ist.
 // fit 'contain' zeigt Querformat-Bilder komplett statt beschnitten.
 export const photos = [
-  { src: 'photos/story/01-unser-anfang.jpg', caption: 'Unser Anfang', note: 'Ich war so nervös, du hast keine Ahnung.', emoji: '🌱', fit: 'contain' },
+  { src: 'photos/story/01-unser-anfang.jpg', caption: 'Unser Anfang', note: 'Alles hat damit angefangen, dass ich dir eine Website verkaufen wollte. Ich war sehr nervös bei unserem ersten Treffen.', emoji: '🌱', fit: 'contain' },
   { src: 'photos/story/02-dein-laecheln.jpg', caption: 'Dein Lächeln, das alles leichter macht', note: 'Dein Lachen hat mich innerlich beruhigt.', emoji: '😄' },
   { src: 'photos/story/03-erstes-fruehstueck.jpg', caption: 'Unser erstes gemeinsames Frühstück', note: 'Essen war nicht nur immer gut, ich hatte einfach sogar Spaß, mit dir zu essen.', emoji: '🥐' },
   { src: 'photos/story/04-china.jpg', caption: 'Unser erstes Mal in China', note: 'Wir waren beschäftigt mit Bilder machen, sonst hätten wir den schwarzen Koi-Fisch mitgenommen.', emoji: '🏮' },
@@ -128,6 +128,6 @@ export const finalPage = {
     'Diese Chance verschwende ich nicht. Versprochen.',
     '*Ich liebe dich. Mehr als alles.*',
   ],
-  hint: 'Falls WhatsApp nicht aufgegangen ist, tipp hier:',
+  hint: 'Und jetzt lass es mich wissen:',
   button: 'Schreib mir auf WhatsApp',
 };
