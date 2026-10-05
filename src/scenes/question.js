@@ -34,6 +34,7 @@ export default {
       yes.style.minWidth = `${w}px`;
       yes.style.minHeight = `${hgt}px`;
       yes.style.fontSize = `${Math.min(1.15 + n * 0.3, 3.2)}rem`;
+      yes.style.borderRadius = `${Math.max(28, 48 - n * 4)}px`;
       if (n >= 2) picture?.classList.add('collapsed');
       setTimeout(() => yes.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 350);
     };
