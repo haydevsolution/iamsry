@@ -8,10 +8,16 @@ export default {
     let attempts = 0;
     const comment = h('p', { class: 'lead question-comment' }, ' ');
 
+    // Bild über der Frage; fehlt die Datei, wird es still ausgeblendet
+    const picture = questionPage.image
+      ? h('figure', { class: 'question-pic fade-in' }, h('img', { src: questionPage.image.src, alt: questionPage.image.alt, draggable: 'false' }))
+      : null;
+    picture?.querySelector('img').addEventListener('error', () => picture.remove());
+
     const yes = button('Ja ❤️', () => {
       yes.disabled = true;
       no.remove();
-      comment.textContent = 'Danke.';
+      comment.textContent = ' ';
       celebrate();
       buzz([40, 60, 40, 60, 120]);
       // Weiter zur Finale-Seite; WhatsApp öffnet sie dort selbst per Button
@@ -21,6 +27,17 @@ export default {
     const no = button('Nein', () => {}, 'ghost', { class: 'btn btn-ghost btn-no' });
 
     // Der Button flieht nur in den Bereich unterhalb des Textes, nie über die Worte.
+    // "Ja" wächst in Breite und Höhe, bis es fast den Bildschirm füllt; das Foto macht Platz
+    const grow = (n) => {
+      const w = Math.min(300 + n * 45, window.innerWidth * 0.92);
+      const hgt = Math.min(56 + n * 55, window.innerHeight * 0.55);
+      yes.style.minWidth = `${w}px`;
+      yes.style.minHeight = `${hgt}px`;
+      yes.style.fontSize = `${Math.min(1.15 + n * 0.3, 3.2)}rem`;
+      if (n >= 2) picture?.classList.add('collapsed');
+      setTimeout(() => yes.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 350);
+    };
+
     const flee = () => {
       const pad = 16;
       const w = no.offsetWidth, hgt = no.offsetHeight;
@@ -52,7 +69,7 @@ export default {
       flee();
       no.textContent = noTexts[Math.min(n, noTexts.length - 1)];
       no.style.transform = `scale(${Math.max(0.45, 1 - n * 0.09)})`;
-      yes.style.transform = `scale(${Math.min(1.9, 1 + n * 0.14)})`;
+      grow(n);
       comment.textContent = ' ';
       if (n >= noTexts.length) {
         no.style.opacity = '0';
@@ -62,12 +79,6 @@ export default {
     // Auf dem Handy gibt es kein Hover: pointerdown greift vor dem Klick
     no.addEventListener('pointerdown', onNo);
     no.addEventListener('click', (e) => e.preventDefault());
-
-    // Bild über der Frage; fehlt die Datei, wird es still ausgeblendet
-    const picture = questionPage.image
-      ? h('figure', { class: 'question-pic fade-in' }, h('img', { src: questionPage.image.src, alt: questionPage.image.alt, draggable: 'false' }))
-      : null;
-    picture?.querySelector('img').addEventListener('error', () => picture.remove());
 
     el.append(
       ...(picture ? [picture] : []),
