@@ -101,7 +101,8 @@
 .question-stage { position: relative; width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .btn-no { transition: transform .25s cubic-bezier(.2,.8,.2,1), left .25s, top .25s, font-size .25s, opacity .3s; }
 .btn-no.fleeing { position: fixed; z-index: 50; margin: 0; }
-.btn-yes { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+.btn-yes { min-width: min(78vw, 300px); font-size: 1.15rem; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+.question-stage { flex-direction: column; gap: 18px; }
 .question-face { font-size: 4.5rem; animation: bob 2.4s ease-in-out infinite; line-height: 1; }
 
 /* ── Finale ──────────────────────────────────────────────── */
