@@ -106,8 +106,9 @@
 
 /* ── Finale ──────────────────────────────────────────────── */
 .big-heart { font-size: 6rem; line-height: 1; animation: heartbeat 1.6s ease-in-out infinite, glow-pulse 1.6s ease-in-out infinite; }
-.final-lines p { color: var(--text); font-size: 1.15rem; opacity: 0; animation: fade-up .7s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: var(--d, 0s); }
-.signature { font-family: var(--font-hand); font-size: 2rem; color: var(--rose-soft); }
+.final-lines { display: flex; flex-direction: column; gap: 14px; }
+.final-lines p { color: var(--text); font-size: 1.1rem; line-height: 1.55; max-width: none; opacity: 0; animation: fade-up .7s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: var(--d, 0s); }
+.final-cta { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 8px; }
 
 /* ── Brief ───────────────────────────────────────────────── */
 .scene-letter { justify-content: flex-start; }

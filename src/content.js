@@ -3,7 +3,6 @@
 // ─────────────────────────────────────────────────────────────
 
 export const HER_NAME = 'Madlin';
-export const MY_NAME = 'Ich';
 
 // WhatsApp-Nummer ohne + und ohne Leerzeichen, z.B. '4917612345678'
 export const WHATSAPP_NUMBER = '4917647155348';
@@ -122,9 +121,13 @@ export const noTexts = [
   'Okay, der Button gibt auf 😅',
 ];
 
-export const finalMessage = [
-  `Danke, ${HER_NAME}.`,
-  'Ich weiß, dass Worte allein nichts beweisen.',
-  'Deshalb werde ich es dir jeden Tag zeigen.',
-  'Ich liebe dich. Mehr als alles.',
-];
+export const finalPage = {
+  title: `Danke, ${HER_NAME}.`,
+  lines: [
+    'Du hast gerade auf Ja getippt. Ich weiß, was das bedeutet, und ich nehme es nicht als selbstverständlich.',
+    'Diese Chance verschwende ich nicht. Versprochen.',
+    '*Ich liebe dich. Mehr als alles.*',
+  ],
+  hint: 'Falls WhatsApp nicht aufgegangen ist, tipp hier:',
+  button: 'Schreib mir auf WhatsApp',
+};
