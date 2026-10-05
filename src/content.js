@@ -106,7 +106,7 @@ export const questionPage = {
 
 // Hintergrundmusik, läuft in dieser Reihenfolge in Endlosschleife (Dateien in public/audio/)
 export const playlist = [
-  'audio/01-hate-that-i-love-you.mp3',
+  'audio/01-hate-that-i-love-you-v2.mp3',
   'audio/02-take-a-bow.mp3',
 ];
 
