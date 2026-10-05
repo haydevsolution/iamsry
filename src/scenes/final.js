@@ -19,7 +19,6 @@ export default {
     const afterLines = 0.4 + finalPage.lines.length * 0.6;
     const wa = WHATSAPP_NUMBER
       ? h('div', { class: 'final-cta fade-in', style: { animationDelay: `${afterLines}s` } },
-          h('p', { class: 'hint' }, finalPage.hint),
           h('a', { class: 'btn btn-whatsapp', href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_TEXT)}`, target: '_blank', rel: 'noopener' }, finalPage.button),
         )
       : null;
