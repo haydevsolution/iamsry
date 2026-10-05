@@ -6,7 +6,7 @@ export default {
   id: 'promises',
   render({ el, next }) {
     let sealed = 0;
-    const cta = h('div', { class: 'btn-row hidden fade-in' }, button('Ich hab noch eine Frage', () => next()));
+    const cta = h('div', { class: 'btn-row hidden fade-in' }, button('Weiter', () => next()));
 
     const list = h('div', { class: 'promise-list' },
       promises.map((p, i) => {
