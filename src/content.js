@@ -13,7 +13,7 @@ export const WHATSAPP_TEXT = 'Ja ❤️';
 // fit 'contain' zeigt Querformat-Bilder komplett statt beschnitten.
 export const photos = [
   { src: 'photos/story/01-unser-anfang.jpg', caption: 'Unser Anfang', note: 'Alles hat damit angefangen, dass ich dir eine Website verkaufen wollte. Ich war sehr nervös bei unserem ersten Treffen.', emoji: '🌱', fit: 'contain' },
-  { src: 'photos/story/02-dein-laecheln.jpg', caption: 'Dein Lächeln, das alles leichter macht', note: 'Dein Lachen hat mich innerlich beruhigt.', emoji: '😄' },
+  { src: 'photos/story/02-dein-laecheln.jpg', caption: 'Dein Lächeln, das alles leichter macht', note: 'Dein Lächeln bringt mir innere Ruhe und macht mich glücklich.', emoji: '😄' },
   { src: 'photos/story/03-erstes-fruehstueck.jpg', caption: 'Unser erstes gemeinsames Frühstück', note: 'Essen war nicht nur immer gut, ich hatte einfach sogar Spaß, mit dir zu essen.', emoji: '🥐' },
   { src: 'photos/story/04-china.jpg', caption: 'Unser erstes Mal in China', note: 'Wir waren beschäftigt mit Bilder machen, sonst hätten wir den schwarzen Koi-Fisch mitgenommen.', emoji: '🏮' },
   { type: 'video', src: 'photos/story/05-fahrradreise.mp4', poster: 'photos/story/05-fahrradreise-poster.jpg', caption: 'Unsere erste gemeinsame Fahrradreise', note: 'Gott sei Dank hat uns der Bus zurück mitgenommen.', emoji: '🚲' },
