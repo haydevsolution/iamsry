@@ -2,6 +2,10 @@ import { h, button, buzz } from '../ui.js';
 import { questionPage, noTexts } from '../content.js';
 import { celebrate } from '../effects.js';
 
+// Prüft, ob zwei Rechtecke sich (mit Abstand) überschneiden
+const overlaps = (a, b, gap = 10) =>
+  a.left < b.right + gap && a.right > b.left - gap && a.top < b.bottom + gap && a.bottom > b.top - gap;
+
 export default {
   id: 'question',
   render({ el, go }) {
@@ -17,61 +21,95 @@ export default {
     const yes = button('Ja ❤️', () => {
       yes.disabled = true;
       no.remove();
-      comment.textContent = ' ';
       celebrate();
       buzz([40, 60, 40, 60, 120]);
-      // Weiter zur Finale-Seite; WhatsApp öffnet sie dort selbst per Button
       setTimeout(() => go('final'), 1600);
     }, 'primary', { class: 'btn btn-primary btn-yes' });
 
     const no = button('Nein', () => {}, 'ghost', { class: 'btn btn-ghost btn-no' });
 
-    // Der Button flieht nur in den Bereich unterhalb des Textes, nie über die Worte.
-    // "Ja" wächst in Breite und Höhe, bis es fast den Bildschirm füllt; das Foto macht Platz
+    // Spielfläche unter dem Text: "Ja" oben, "Nein" bewegt sich nur innerhalb dieser Fläche
+    const stage = h('div', { class: 'question-stage' }, yes, no);
+
+    // Sichtbare (skalierte) Größe von "Nein" und Versatz zur Layout-Box
+    const noBox = () => {
+      const r = no.getBoundingClientRect();
+      return { vw: r.width, vh: r.height, dx: (no.offsetWidth - r.width) / 2, dy: (no.offsetHeight - r.height) / 2 };
+    };
+
+    // "Ja" wächst in Breite und Höhe, lässt aber unten immer Platz für "Nein"
     const grow = (n) => {
-      const w = Math.min(300 + n * 45, window.innerWidth * 0.92);
-      const hgt = Math.min(56 + n * 55, window.innerHeight * 0.55);
+      const { vh } = noBox();
+      const reserve = vh + 40;
+      const cap = Math.max(56, stage.clientHeight - reserve);
+      const w = Math.min(300 + n * 45, stage.clientWidth);
+      const hgt = Math.min(56 + n * 55, cap);
       yes.style.minWidth = `${w}px`;
       yes.style.minHeight = `${hgt}px`;
       yes.style.fontSize = `${Math.min(1.15 + n * 0.3, 3.2)}rem`;
       yes.style.borderRadius = `${Math.max(28, 48 - n * 4)}px`;
-      if (n >= 2) picture?.classList.add('collapsed');
-      setTimeout(() => yes.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 350);
     };
 
+    // "Nein" sucht einen Platz in der Spielfläche, der das "Ja" nicht berührt
     const flee = () => {
-      const pad = 16;
-      const w = no.offsetWidth, hgt = no.offsetHeight;
-      const textBottom = comment.getBoundingClientRect().bottom + 12;
-      const minY = Math.min(textBottom, window.innerHeight - hgt - pad);
-      const maxY = window.innerHeight - hgt - pad;
-      const x = pad + Math.random() * (window.innerWidth - w - pad * 2);
-      const y = minY + Math.random() * Math.max(0, maxY - minY);
+      if (!no.isConnected) return;
+      const pad = 4;
+      const { vw, vh, dx, dy } = noBox();
+      const s = stage.getBoundingClientRect();
+      const y = yes.getBoundingClientRect();
+      const yesLocal = { left: y.left - s.left, right: y.right - s.left, top: y.top - s.top, bottom: y.bottom - s.top };
+      const maxX = Math.max(pad, s.width - vw - pad);
+      const maxY = Math.max(pad, s.height - vh - pad);
+
+      let best = null;
+      for (let i = 0; i < 80 && !best; i += 1) {
+        const x = pad + Math.random() * (maxX - pad);
+        const yy = pad + Math.random() * (maxY - pad);
+        const cand = { left: x, right: x + vw, top: yy, bottom: yy + vh };
+        if (!overlaps(cand, yesLocal)) best = cand;
+      }
+      if (!best) {
+        // Immer frei: der reservierte Streifen unterhalb vom "Ja"
+        best = { left: pad + Math.random() * (maxX - pad), top: Math.min(yesLocal.bottom + 14, maxY) };
+      }
       no.classList.add('fleeing');
-      no.style.left = `${x}px`;
-      no.style.top = `${y}px`;
+      no.style.left = `${best.left - dx}px`;
+      no.style.top = `${best.top - dy}px`;
+    };
+
+    // Nach jedem Tipp 1,5 s lang prüfen, ob "Ja" beim Wachsen das "Nein" berührt hat
+    const ensureClear = () => {
+      if (!no.isConnected || !no.classList.contains('fleeing')) return;
+      if (overlaps(no.getBoundingClientRect(), yes.getBoundingClientRect())) flee();
+    };
+    let watch = null;
+    const watchClear = () => {
+      clearInterval(watch);
+      const until = Date.now() + 1500;
+      watch = setInterval(() => { ensureClear(); if (Date.now() > until) clearInterval(watch); }, 80);
     };
 
     const onNo = (e) => {
       e.preventDefault();
       attempts += 1;
       buzz(5);
+      picture?.classList.add('collapsed'); // Foto macht ab dem ersten "Nein" Platz
       const commentIdx = attempts - 1;
 
       if (commentIdx < questionPage.noComments.length) {
-        // Erste Versuche: nur Kommentar und kurzes Wackeln
         comment.textContent = questionPage.noComments[commentIdx];
         flee();
+        watchClear();
         return;
       }
 
-      // Ab jetzt: Button flieht, wird kleiner, "Ja" wächst
       const n = attempts - questionPage.noComments.length;
-      flee();
+      grow(n);
       no.textContent = noTexts[Math.min(n, noTexts.length - 1)];
       no.style.transform = `scale(${Math.max(0.45, 1 - n * 0.09)})`;
-      grow(n);
       comment.textContent = ' ';
+      flee();
+      watchClear();
       if (n >= noTexts.length) {
         no.style.opacity = '0';
         setTimeout(() => no.remove(), 400);
@@ -86,8 +124,8 @@ export default {
       h('h2', { class: 'fade-in' }, questionPage.title),
       h('p', { class: 'fade-in' }, questionPage.text),
       comment,
-      h('div', { class: 'question-stage' }, yes, no),
+      stage,
     );
-    return () => no.remove();
+    return () => { clearInterval(watch); no.remove(); };
   },
 };
