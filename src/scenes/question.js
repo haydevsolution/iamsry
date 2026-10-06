@@ -29,7 +29,8 @@ export default {
     const no = button('Nein', () => {}, 'ghost', { class: 'btn btn-ghost btn-no' });
 
     // Spielfläche unter dem Text: "Ja" oben, "Nein" bewegt sich nur innerhalb dieser Fläche
-    const stage = h('div', { class: 'question-stage' }, yes, no);
+    const hint = h('p', { class: 'hint question-hint fade-in' }, questionPage.hint);
+    const stage = h('div', { class: 'question-stage' }, yes, no, hint);
 
     // Sichtbare (skalierte) Größe von "Nein" und Versatz zur Layout-Box
     const noBox = () => {
@@ -94,6 +95,7 @@ export default {
       attempts += 1;
       buzz(5);
       picture?.classList.add('collapsed'); // Foto macht ab dem ersten "Nein" Platz
+      hint.remove(); // Hinweis hat seinen Zweck erfüllt
       const commentIdx = attempts - 1;
 
       if (commentIdx < questionPage.noComments.length) {
